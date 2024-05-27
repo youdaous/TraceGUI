@@ -1,4 +1,6 @@
 QT       += core gui
+QT       += network
+QT       += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,15 +11,25 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    connectserialdialog.cpp \
+    connectudpdialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    trackwidget.cpp
+    serialthread.cpp \
+    trackwidget.cpp \
+    udpthread.cpp
 
 HEADERS += \
+    connectserialdialog.h \
+    connectudpdialog.h \
     mainwindow.h \
-    trackwidget.h
+    serialthread.h \
+    trackwidget.h \
+    udpthread.h
 
 FORMS += \
+    connectserialdialog.ui \
+    connectudpdialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

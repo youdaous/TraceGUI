@@ -6,7 +6,7 @@ TrackWidget::TrackWidget(QWidget *parent) : QWidget(parent)
 {
     setMinimumWidth(500);
     m_pixmap = QPixmap(size());  // 初始化 pixmap 大小
-    m_pixmap.fill(Qt::white);    // 填充背景颜色
+    // m_pixmap.fill(Qt::white);    // 填充背景颜色
 }
 
 void TrackWidget::addPoint(const QPoint &point)
