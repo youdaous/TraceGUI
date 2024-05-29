@@ -42,6 +42,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
     TrackWidget *trackWidget;
 
     QLabel *labComInfoA;

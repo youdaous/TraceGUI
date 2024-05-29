@@ -19,6 +19,11 @@ void UdpThread::run()
     exec(); // 启动事件循环
 }
 
+bool UdpThread::getRunnigState()
+{
+    return running;
+}
+
 void UdpThread::startUdpCommunication(const QHostAddress &address, quint16 port)
 {
     if (running) {

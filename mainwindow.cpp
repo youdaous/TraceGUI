@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(windowTitle()+"---本机IP："+localIP);
 
     QHBoxLayout *mainlayout =  new QHBoxLayout(ui->centralwidget);
-    trackWidget = new TrackWidget(parent);
+    trackWidget = new TrackWidget(this);
     mainlayout->addWidget(trackWidget);
     mainlayout->addWidget(ui->groupBox_state);
 
@@ -107,29 +107,41 @@ void MainWindow::on_actConnectUDP_toggled(bool arg1)
             udpTargetPort = conudpDialog->getTargetPort();
             udpBindPort = conudpDialog->getBindPort();
 
-            labComInfoA->setText("TargetIP: "+udpTargetIP);
-            labComInfoB->setText("TargetPort: "+QString::number(udpTargetPort));
-            labComInfoC->setText("BindPort: "+QString::number(udpBindPort));
+            QHostAddress targetAddr(localIP);
+            udpThread->startUdpCommunication(targetAddr, udpBindPort);
 
+            if (udpThread->getRunnigState())
+            {
+                labComInfoA->setText("TargetIP: "+udpTargetIP);
+                labComInfoB->setText("TargetPort: "+QString::number(udpTargetPort));
+                labComInfoC->setText("BindPort: "+QString::number(udpBindPort));
+            }
+        }
+        else
+        {
+            ui->actConnectUDP->setChecked(false);
         }
 
         delete conudpDialog;
         // socket绑定端口
-        QHostAddress targetAddr(localIP);
-        udpThread->startUdpCommunication(targetAddr, udpBindPort);
+
     }
     else
     {
-        // 取消udp连接
-        udpThread->stopUdpCommunication();
-        QString dlgTitle= "消息框";
-        QString strInfo = "udp连接已取消！";
-        QMessageBox::information(this, dlgTitle, strInfo,
-                                 QMessageBox::Ok, QMessageBox::NoButton);
+        if (udpThread->getRunnigState())
+        {
+            // 取消udp连接
+            udpThread->stopUdpCommunication();
+            QString dlgTitle= "消息框";
+            QString strInfo = "udp连接已取消！";
+            QMessageBox::information(this, dlgTitle, strInfo,
+                                     QMessageBox::Ok, QMessageBox::NoButton);
 
-        labComInfoA->setText("TargetIP:    ");
-        labComInfoB->setText("TargetPort:    ");
-        labComInfoC->setText("BindPort:    ");
+            labComInfoA->setText("TargetIP:    ");
+            labComInfoB->setText("TargetPort:    ");
+            labComInfoC->setText("BindPort:    ");
+        }
+
     }
 
 }
@@ -148,24 +160,37 @@ void MainWindow::on_actConnectSerial_toggled(bool arg1)
             serialName = conSerialDialog->getPortName();
             baudRate = conSerialDialog->getBaudRate();
 
-            labComInfoCom->setText("COM端口: "+serialName);
-            labComInfoBaudRate->setText("波特率: "+QString::number(baudRate));
+            serialThread->startSerialCommunication(serialName, baudRate);
+
+            if (serialThread->getRunningState())
+            {
+                labComInfoCom->setText("COM端口: "+serialName);
+                labComInfoBaudRate->setText("波特率: "+QString::number(baudRate));
+            }
+        }
+        else
+        {
+            ui->actConnectSerial->setChecked(false);
         }
 
         delete conSerialDialog;
-        serialThread->startSerialCommunication(serialName, baudRate);
+
     }
     else
     {
-        // 取消serial连接
-        serialThread->stopSerialCommunication();
-        QString dlgTitle= "消息框";
-        QString strInfo = "串口连接已取消！";
-        QMessageBox::information(this, dlgTitle, strInfo,
-                                 QMessageBox::Ok, QMessageBox::NoButton);
+        if (serialThread->getRunningState())
+        {
+            // 取消serial连接
+            serialThread->stopSerialCommunication();
+            QString dlgTitle= "消息框";
+            QString strInfo = "串口连接已取消！";
+            QMessageBox::information(this, dlgTitle, strInfo,
+                                     QMessageBox::Ok, QMessageBox::NoButton);
 
-        labComInfoCom->setText("COM端口:    ");
-        labComInfoBaudRate->setText("波特率:    ");
+            labComInfoCom->setText("COM端口:    ");
+            labComInfoBaudRate->setText("波特率:    ");
+        }
+
     }
 }
 

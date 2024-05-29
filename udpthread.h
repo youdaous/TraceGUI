@@ -15,6 +15,8 @@ public:
 
     void run() override;
 
+    bool getRunnigState();
+
 signals:
     void dataReceived(const QByteArray &data);
     void errorOccurred(const QString &message);

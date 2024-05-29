@@ -23,6 +23,7 @@ signals:
 public:
     void startSerialCommunication(const QString &portName, const int &baudRate);
     void stopSerialCommunication();
+    bool getRunningState();
 
 private slots:
     void readData();

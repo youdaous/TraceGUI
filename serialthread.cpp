@@ -54,6 +54,11 @@ void SerialThread::stopSerialCommunication()
     wait();
 }
 
+bool SerialThread::getRunningState()
+{
+    return running;
+}
+
 void SerialThread::readData()
 {
     if (!serialPort->canReadLine()) {
