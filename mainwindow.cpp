@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     groupBoxPlot->setLayout(plotlayout);
     mainlayout->addWidget(groupBoxPlot, 3);
     mainlayout->addWidget(ui->groupBox_state,1);
-    ui->centralwidget->setLayout(mainlayout);
+    // ui->centralwidget->setLayout(mainlayout);
 
     // 状态栏标签
     labComInfoA = new QLabel(this);
@@ -73,7 +73,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    customPlotWidget->startPlotTest();
     // // 测试绘图功能
     // // Add a new point to the trackWidget (for demonstration, use random points)
     // QPoint newPoint(QRandomGenerator::global()->generate() % trackWidget->width(),
@@ -240,7 +239,7 @@ void MainWindow::handleUdpError(const QString &message)
 
 void MainWindow::on_pushButton_clicked(bool checked)
 {
-    Q_UNUSED(checked)
-    // customPlotWidget->startPlotTest(checked);
+    // Q_UNUSED(checked)
+    customPlotWidget->startPlotTest(checked);
 }
 

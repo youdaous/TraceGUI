@@ -17,16 +17,16 @@
    <widget class="QGroupBox" name="groupBox_state">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>404</width>
-      <height>405</height>
+      <x>11</x>
+      <y>11</y>
+      <width>487</width>
+      <height>458</height>
      </rect>
     </property>
     <property name="title">
      <string>状态</string>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_4">
+    <layout class="QVBoxLayout" name="verticalLayout_state">
      <item>
       <widget class="QGroupBox" name="groupBox_2">
        <property name="title">
@@ -151,15 +151,8 @@
         <string>设定状态</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>坐标x</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEditSetX"/>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEditSetDepth"/>
         </item>
         <item row="0" column="2">
          <widget class="QLabel" name="label_13">
@@ -168,18 +161,12 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QLineEdit" name="lineEditSetY"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_11">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_14">
           <property name="text">
-           <string>航向</string>
+           <string>坐标x</string>
           </property>
          </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEditSetHead"/>
         </item>
         <item row="1" column="2">
          <widget class="QLabel" name="label_12">
@@ -191,15 +178,15 @@
         <item row="1" column="3">
          <widget class="QLineEdit" name="lineEditSetVel"/>
         </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_15">
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_11">
           <property name="text">
-           <string>深度</string>
+           <string>航向</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEditSetDepth"/>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEditSetHead"/>
         </item>
         <item row="2" column="2">
          <widget class="QLabel" name="label_16">
@@ -211,6 +198,16 @@
         <item row="2" column="3">
          <widget class="QLineEdit" name="lineEditSetHeight"/>
         </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEditSetX"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>深度</string>
+          </property>
+         </widget>
+        </item>
         <item row="3" column="1" colspan="3">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
@@ -219,7 +216,7 @@
              <string>startPlot</string>
             </property>
             <property name="checkable">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -248,6 +245,9 @@
           </item>
          </layout>
         </item>
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="lineEditSetY"/>
+        </item>
        </layout>
       </widget>
      </item>
@@ -260,7 +260,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
