@@ -8,6 +8,7 @@ class TrackWidget;
 class QLabel;
 class SerialThread;
 class UdpThread;
+class CustomPlotWidget;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -40,6 +41,8 @@ private slots:
 
     void handleUdpError(const QString &message);
 
+    void on_pushButton_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 
@@ -52,6 +55,7 @@ private:
     QLabel *labComInfoCom;
     QLabel *labComInfoBaudRate;
 
+    CustomPlotWidget *customPlotWidget;
 
     QString localIP;
     QString getlocalIP();

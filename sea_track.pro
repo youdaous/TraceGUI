@@ -2,7 +2,7 @@ QT       += core gui
 QT       += network
 QT       += serialport
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 CONFIG += c++17
 
@@ -13,19 +13,23 @@ CONFIG += c++17
 SOURCES += \
     connectserialdialog.cpp \
     connectudpdialog.cpp \
+    customplotwidget.cpp \
     main.cpp \
     mainwindow.cpp \
     serialthread.cpp \
     trackwidget.cpp \
-    udpthread.cpp
+    udpthread.cpp \
+    qcustomplot.cpp
 
 HEADERS += \
     connectserialdialog.h \
     connectudpdialog.h \
+    customplotwidget.h \
     mainwindow.h \
     serialthread.h \
     trackwidget.h \
-    udpthread.h
+    udpthread.h \
+    qcustomplot.h
 
 FORMS += \
     connectserialdialog.ui \

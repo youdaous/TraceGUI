@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "trackwidget.h"
+// #include "trackwidget.h"
+#include "customplotwidget.h"
 #include "connectudpdialog.h"
 #include "connectserialdialog.h"
 #include "serialthread.h"
@@ -20,11 +21,19 @@ MainWindow::MainWindow(QWidget *parent)
     localIP = getlocalIP();
     setWindowTitle(windowTitle()+"---本机IP："+localIP);
 
+    // 绘图界面
+    customPlotWidget = new CustomPlotWidget(this);
     QHBoxLayout *mainlayout =  new QHBoxLayout(ui->centralwidget);
-    trackWidget = new TrackWidget(this);
-    mainlayout->addWidget(trackWidget);
-    mainlayout->addWidget(ui->groupBox_state);
+    QHBoxLayout *plotlayout =  new QHBoxLayout(ui->centralwidget);
+    plotlayout->addWidget(customPlotWidget);
+    QGroupBox *groupBoxPlot = new QGroupBox(this);
+    groupBoxPlot->setTitle("目标轨迹");
+    groupBoxPlot->setLayout(plotlayout);
+    mainlayout->addWidget(groupBoxPlot, 3);
+    mainlayout->addWidget(ui->groupBox_state,1);
+    ui->centralwidget->setLayout(mainlayout);
 
+    // 状态栏标签
     labComInfoA = new QLabel(this);
     labComInfoB = new QLabel(this);
     labComInfoC = new QLabel(this);
@@ -64,11 +73,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    // 测试绘图功能
-    // Add a new point to the trackWidget (for demonstration, use random points)
-    QPoint newPoint(QRandomGenerator::global()->generate() % trackWidget->width(),
-                    QRandomGenerator::global()->generate() % trackWidget->height());
-    trackWidget->addPoint(newPoint);
+    customPlotWidget->startPlotTest();
+    // // 测试绘图功能
+    // // Add a new point to the trackWidget (for demonstration, use random points)
+    // QPoint newPoint(QRandomGenerator::global()->generate() % trackWidget->width(),
+    //                 QRandomGenerator::global()->generate() % trackWidget->height());
+    // trackWidget->addPoint(newPoint);
 }
 
 QString MainWindow::getlocalIP()
@@ -225,5 +235,12 @@ void MainWindow::handleUdpData(const QByteArray &data)
 void MainWindow::handleUdpError(const QString &message)
 {
     QMessageBox::warning(this, tr("Warning"), message);
+}
+
+
+void MainWindow::on_pushButton_clicked(bool checked)
+{
+    Q_UNUSED(checked)
+    // customPlotWidget->startPlotTest(checked);
 }
 
