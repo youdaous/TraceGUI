@@ -71,7 +71,7 @@ void CustomPlotWidget::do_plotTimer()
 {
     // QPointF newPoint(pos_x + (QRandomGenerator::global()->generate() % 10) * 0.1 + 0.1,
     //                 pos_y + (QRandomGenerator::global()->generate() % 10) * 0.1 + 0.1);
-    QPointF newPoint(50 * cos(M_PI/50 * T), 50 * sin(M_PI/100 * T));
+    QPointF newPoint(M_PI/5 * T, qExp(-M_PI/100 * T) * 50 * sin(M_PI/20 * T));
     addPoint(newPoint);
     ++T;
     // qDebug()<<newPoint;
