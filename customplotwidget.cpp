@@ -5,16 +5,21 @@ CustomPlotWidget::CustomPlotWidget(QWidget *parent)
 {
     // 在这里进行任何自定义的初始化
     setInteractions(QCP::iRangeDrag | QCP::iRangeZoom); // 启动拖拽和缩放功能
-    addGraph();
-    graph(0)->setPen(QPen(Qt::blue));
-    // graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
-    graph(0)->setAntialiasedFill(false);
+    // addGraph();
+    // graph(0)->setLineStyle(QCPGraph::lsNone);
+    // graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 4)); // 绘制散点
+    // graph(0)->setPen(QPen(Qt::blue));
+    // // graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    // graph(0)->setAntialiasedFill(false);
     // 设置轴标签
     xAxis->setLabel("x/m");
     yAxis->setLabel("y/m");
     // 设置坐标范围
     xAxis->setRange(-100, 100);
     yAxis->setRange(-100, 100);
+
+    // 创建曲线对象
+    curve = new QCPCurve(this->xAxis, this->yAxis);
 
     arrow = new QCPItemLine(this);
 
@@ -55,7 +60,8 @@ void CustomPlotWidget::addPoint(QPointF &position)
 
 void CustomPlotWidget::plotTrajectory()
 {
-    graph(0)->addData(pos_x, pos_y);
+    curve->addData(pos_x, pos_y);
+    // graph(0)->addData(pos_x, pos_y);
     // graph(0)->setData(posList_x, posList_y);
     // qDebug()<<pos_x<<pos_y;
     // 添加箭头
@@ -64,6 +70,7 @@ void CustomPlotWidget::plotTrajectory()
     arrow->start->setCoords(startPoint);
     arrow->end->setCoords(endPoint);
     arrow->setHead(QCPLineEnding::esSpikeArrow);
+    // rescaleAxes(); // 显示范围适应数据点
     replot();
 }
 
@@ -71,7 +78,8 @@ void CustomPlotWidget::do_plotTimer()
 {
     // QPointF newPoint(pos_x + (QRandomGenerator::global()->generate() % 10) * 0.1 + 0.1,
     //                 pos_y + (QRandomGenerator::global()->generate() % 10) * 0.1 + 0.1);
-    QPointF newPoint(M_PI/5 * T, qExp(-M_PI/100 * T) * 50 * sin(M_PI/20 * T));
+    // QPointF newPoint(M_PI/5 * T, qExp(-M_PI/100 * T) * 50 * sin(M_PI/20 * T));
+    QPointF newPoint(50*cos(M_PI/20 * T), 50*sin(M_PI/20 * T)+100);
     addPoint(newPoint);
     ++T;
     // qDebug()<<newPoint;

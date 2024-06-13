@@ -36,22 +36,22 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>坐标x</string>
+           <string>经度</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEditTarX"/>
+         <widget class="QLineEdit" name="lineEditTarLon"/>
         </item>
         <item row="0" column="2" colspan="2">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>坐标y</string>
+           <string>纬度</string>
           </property>
          </widget>
         </item>
         <item row="0" column="4">
-         <widget class="QLineEdit" name="lineEditTarY"/>
+         <widget class="QLineEdit" name="lineEditTarLat"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_3">
@@ -105,22 +105,22 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_10">
           <property name="text">
-           <string>坐标x</string>
+           <string>经度</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEditLocalX"/>
+         <widget class="QLineEdit" name="lineEditLocalLon"/>
         </item>
         <item row="0" column="2" colspan="2">
          <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>坐标y</string>
+           <string>纬度</string>
           </property>
          </widget>
         </item>
         <item row="0" column="4">
-         <widget class="QLineEdit" name="lineEditLocalY"/>
+         <widget class="QLineEdit" name="lineEditLocalLat"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_7">
@@ -260,7 +260,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

@@ -12,8 +12,10 @@ public:
 
     void startPlotTest(bool isStart);
 
-private:
     void addPoint(QPointF &position);
+
+private:
+
     void plotTrajectory();
 
 private:
@@ -23,6 +25,8 @@ private:
     QTimer *plotTimer;
     QCPItemLine *arrow;
     // QList<double> posList_x, posList_y;
+
+    QCPCurve *curve;
 
     int T;
 

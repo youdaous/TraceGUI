@@ -55,10 +55,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->addWidget(labComInfoCom);
     ui->statusbar->addWidget(labComInfoBaudRate);
 
-    // 串口通信数据接受与连接错误警告
+    // 串口通信数据接收与连接错误警告
     connect(serialThread, &SerialThread::dataReceived, this, &MainWindow::handleSerialData);
     connect(serialThread, &SerialThread::errorOccurred, this, &MainWindow::handleSerialError);
-    // UDP通信数据接受与连接错误警告
+    // UDP通信数据接收与连接错误警告
     connect(udpThread, &UdpThread::dataReceived, this, &MainWindow::handleUdpData);
     connect(udpThread, &UdpThread::errorOccurred, this, &MainWindow::handleUdpError);
     // UDP发送数据
@@ -161,7 +161,7 @@ void MainWindow::on_actConnectSerial_toggled(bool arg1)
     if (arg1)
     {
         ConnectSerialDialog *conSerialDialog = new ConnectSerialDialog();
-        conSerialDialog->setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
+        // conSerialDialog->setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
 
         int ret = conSerialDialog->exec();
         if (ret==QDialog::Accepted)
@@ -217,7 +217,28 @@ void MainWindow::on_btnSendData_clicked()
 void MainWindow::handleSerialData(const QByteArray &data)
 {
     // 处理从串口线程接收到的数据，例如显示在UI上
-    Q_UNUSED(data)
+    // Q_UNUSED(data)
+    // 以tracklink navigator LQF 输出格式解析
+    QString str = QString(data);
+    QStringList strList = str.split(",");
+    double latBody = strList[3].toDouble(); // 船体纬度
+    double lonBody = strList[4].toDouble(); // 船体经度
+    double latTarget = strList[5].toDouble(); // 目标纬度
+    double lonTarget = strList[6].toDouble(); // 目标经度
+    double headingBody = strList[7].toDouble(); // 船体航向
+    double depthTarget = strList[8].toDouble(); // 目标深度
+    qDebug()<<strList;
+    // lineEdit显示坐标值
+    ui->lineEditLocalLon->setText(QString::number(lonBody));
+    ui->lineEditLocalLat->setText(QString::number(latBody));
+    ui->lineEditTarLon->setText(QString::number(lonTarget));
+    ui->lineEditTarLat->setText(QString::number(latTarget));
+    ui->lineEditTarDepth->setText(QString::number(depthTarget));
+    ui->lineEditLocalHead->setText(QString::number(headingBody));
+    // 轨迹绘图
+    QPointF newPoint(lonTarget-lonBody, latTarget-latBody);
+    customPlotWidget->addPoint(newPoint);
+
 }
 
 void MainWindow::handleSerialError(const QString &message)

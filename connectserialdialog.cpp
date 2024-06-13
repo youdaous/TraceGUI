@@ -15,7 +15,7 @@ ConnectSerialDialog::ConnectSerialDialog(QWidget *parent)
     {
         ui->comboBoxBaud->addItem(QString::number(baud));
     }
-    ui->comboBoxBaud->setCurrentText("115200");
+    ui->comboBoxBaud->setCurrentText("9600");
 }
 
 ConnectSerialDialog::~ConnectSerialDialog()
