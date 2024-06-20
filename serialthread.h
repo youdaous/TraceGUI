@@ -28,6 +28,9 @@ public:
 private slots:
     void readData();
 
+public slots:
+    void sendData(const QByteArray &data);
+
 private:
     QSerialPort *serialPort;
     bool running;

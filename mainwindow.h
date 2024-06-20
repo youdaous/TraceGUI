@@ -43,6 +43,8 @@ private slots:
 
     void on_pushButton_clicked(bool checked);
 
+    void on_actConnectSerial_2_toggled(bool arg1);
+
 private:
     Ui::MainWindow *ui;
 
@@ -54,6 +56,9 @@ private:
 
     QLabel *labComInfoCom;
     QLabel *labComInfoBaudRate;
+
+    QLabel *labComInfoCom_2;
+    QLabel *labComInfoBaudRate_2;
 
     CustomPlotWidget *customPlotWidget;
 
@@ -70,8 +75,9 @@ private:
     int baudRate;
     // 串口通信类对象
     SerialThread *serialThread;
+    SerialThread *serialSendThread;
 
 signals:
-    void sendDataRequest(const QByteArray &data, const QHostAddress &address, quint16 port);
+    void sendDataRequest(const QByteArray &data);
 };
 #endif // MAINWINDOW_H

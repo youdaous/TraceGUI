@@ -1,5 +1,6 @@
 #include "serialthread.h"
 #include <QMessageBox>
+#include <QDebug>
 
 SerialThread::SerialThread(QObject *parent)
     : QThread(parent), serialPort(new QSerialPort(this)), running(false)
@@ -48,7 +49,7 @@ void SerialThread::stopSerialCommunication()
     running = false;
     if (serialPort->isOpen())
     {
-            serialPort->close();
+        serialPort->close();
     }
     quit();
     wait();
@@ -67,5 +68,10 @@ void SerialThread::readData()
 
     QByteArray data = serialPort->readAll();
     emit dataReceived(data);
+}
+
+void SerialThread::sendData(const QByteArray &data)
+{
+    serialPort->write(data);
 }
 
